@@ -190,17 +190,19 @@ def add_card_confirm(
 
     if platform.system() == "Windows":
         chrome_exe = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+	debug_path = "--user-data-dir=C:\\temp\\chrome-debug"
 
         if not os.path.exists(chrome_exe):
             chrome_exe = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
     else:
         chrome_exe = "google-chrome"
+	debug_path = "--user-data-dir=chrome-debug"
 
     chrome = subprocess.Popen(
     [
         chrome_exe,
         "--remote-debugging-port=9222",
-        "--user-data-dir=chrome-debug",
+        debug_path,
         "--disable-logging",
         "--log-level=3",
     ],
