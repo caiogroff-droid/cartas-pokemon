@@ -17,27 +17,16 @@
     <div>{{ state }}: R$ {{ price }}</div>
     {% endfor %}
   </td>
+  {% else %}
+  <td class="cell-state-prices">
+    <div style="width: 100%;"></div>
+  </td>
   {% endif %}
 
   <td>
-    <input
-      class="fav-toggle"
-      type="checkbox"
-      title="Favoritar"
-      {%
-      if
-      variant.favorite
-      %}checked{%
-      endif
-      %}
-      hx-post="/toggle_favorite"
-      hx-trigger="change"
-      hx-vals='js:{ link: "{{ link }}", variant_name: "{{ variant.name }}", value:
-    event.target.checked }'
-      hx-on::change="console.log('changed')"
-      hx-target="closest tr"
-      hx-swap="outerHTML"
-    />
+    <input class="fav-toggle" type="checkbox" title="Favoritar" {% if variant.favorite %}checked{% endif %}
+      hx-post="/toggle_favorite" hx-trigger="change" hx-vals='js:{ link: "{{ link }}", variant_name: "{{ variant.name }}", value:
+    event.target.checked }' hx-on::change="console.log('changed')" hx-target="closest tr" hx-swap="outerHTML" />
   </td>
   <td>{% if variant.favorite %} Possuo {% else %} Não possuo {% endif %}</td>
 </tr>
