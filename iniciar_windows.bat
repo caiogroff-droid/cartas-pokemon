@@ -26,4 +26,5 @@ cd /d "%~dp0components"
 
 
 python -m uvicorn main:app --reload
+echo Server running on http://127.0.0.1:8000/
 pause
