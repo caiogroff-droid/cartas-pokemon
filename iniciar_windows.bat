@@ -1,8 +1,17 @@
 @echo off
 
+cd /d "%~dp0"
+
+
 if not exist .venv (
     echo Primeira execucao...
     python -m venv .venv
+
+if errorlevel 1 (
+    echo Erro ao criar ambiente virtual
+    pause
+    exit /b
+)
 
     call .venv\Scripts\activate
 
@@ -12,7 +21,9 @@ if not exist .venv (
     playwright install
 ) else (
     call .venv\Scripts\activate
-    cd /d "%~dp0components"
 )
+cd /d "%~dp0components"
 
-uvicorn components.main:app --host 0.0.0.0 --port 8000
+
+python -m uvicorn main:app --reload
+pause

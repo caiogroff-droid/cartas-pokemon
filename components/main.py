@@ -1,5 +1,7 @@
 import subprocess
 import time
+import platform
+import os
 
 from playwright.sync_api import sync_playwright
 
@@ -186,18 +188,25 @@ def add_card_confirm(
     ]
     loading = True
 
+    if platform.system() == "Windows":
+        chrome_exe = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+
+        if not os.path.exists(chrome_exe):
+            chrome_exe = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+    else:
+        chrome_exe = "google-chrome"
+
     chrome = subprocess.Popen(
-        [
-            "google-chrome",
-            "--remote-debugging-port=9222",
-            "--user-data-dir=/tmp/chrome-debug",
-            "--disable-logging",
-            "--log-level=3",
-            "--silent",
-        ],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
+    [
+        chrome_exe,
+        "--remote-debugging-port=9222",
+        "--user-data-dir=chrome-debug",
+        "--disable-logging",
+        "--log-level=3",
+    ],
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.DEVNULL,
+)
 
     time.sleep(3)
 
@@ -375,19 +384,25 @@ def menu():
 
 def main():
 
-    chrome = subprocess.Popen(
-        [
-            "google-chrome",
-            "--remote-debugging-port=9222",
-            "--user-data-dir=/tmp/chrome-debug",
-            "--disable-logging",
-            "--log-level=3",
-            "--silent",
-        ],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
+    if platform.system() == "Windows":
+        chrome_exe = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 
+        if not os.path.exists(chrome_exe):
+            chrome_exe = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+    else:
+        chrome_exe = "google-chrome"
+
+    chrome = subprocess.Popen(
+    [
+        chrome_exe,
+        "--remote-debugging-port=9222",
+        "--user-data-dir=chrome-debug",
+        "--disable-logging",
+        "--log-level=3",
+    ],
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.DEVNULL,
+)
     time.sleep(3)
 
     global browser
