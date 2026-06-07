@@ -1,0 +1,25 @@
+{% if cartas %}
+<table class="card-table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Link</th>
+      <th>Raridade</th>
+      <th>Variante</th>
+      <th>Preços</th>
+      <th>Estado</th>
+      <th>★</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for link, card in cartas.items() %} {% for variant in card.variants %} {%
+    include "partials/variant_row.html" with context %} {% endfor %} {% endfor
+    %}
+  </tbody>
+</table>
+{% else %}
+<div class="empty-state">
+  <div class="empty-state-icon">◎</div>
+  <p class="empty-state-text">Nenhuma carta encontrada</p>
+</div>
+{% endif %}

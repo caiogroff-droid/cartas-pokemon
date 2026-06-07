@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+
+cartas.db
+
+chrome_profile/
+
+cartas.csv
+
+.idea/
+.vscode/

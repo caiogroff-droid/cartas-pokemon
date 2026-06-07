@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Tracker</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <script src="https://unpkg.com/htmx.org@2.0.7"></script>
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <!-- HEADER -->
+      <header class="app-header">
+        <div class="header-brand">
+          <span class="header-eyebrow">Card Collection</span>
+          <h1 class="header-title">Pokémon <span>Tracker</span></h1>
+        </div>
+      </header>
+
+      <!-- SEARCH -->
+      <div class="search-container">
+        <div class="search-wrapper">
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input
+            class="search-input"
+            type="text"
+            id="search"
+            name="search"
+            placeholder="Buscar carta pelo nome..."
+            autocomplete="off"
+            hx-get="/search"
+            hx-trigger="keyup changed delay:300ms"
+            hx-target="#cards-table"
+            hx-swap="innerHTML"
+            hx-indicator="#cards-table"
+          />
+        </div>
+        <button
+          class="button-ball"
+          title="Adicionar carta"
+          hx-get="/add-card"
+          hx-target=".table-container"
+          onclick="setActive(this)"
+        ></button>
+      </div>
+      <!-- TABLE -->
+      <div class="table-container">
+        <div id="cards-table">{% include "partials/card_table.html" %}</div>
+      </div>
+    </div>
+    <script>
+      function setActive(btn) {
+        document
+          .querySelectorAll("nav#topbar button")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+      }
+    </script>
+  </body>
+</html>

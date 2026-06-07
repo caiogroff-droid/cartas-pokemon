@@ -1,0 +1,43 @@
+<tr class="{% if variant.favorite %}is-favorite{% endif %}">
+  <td class="cell-name">{{ card.name }}</td>
+  <td class="cell-link">
+    <a href="{{ link }}" target="_blank" rel="noopener">↗ link</a>
+  </td>
+  <td class="cell-rarity">{{ card.rarity }}</td>
+  <td class="cell-variant">{{ variant.name }}</td>
+  <td class="cell-prices">
+    <span class="price-badge price-min">{{ variant.min }}</span>
+    <span class="price-badge price-med">{{ variant.medium }}</span>
+    <span class="price-badge price-max">{{ variant.max }}</span>
+  </td>
+
+  {% if variant.prices_per_state %}
+  <td class="cell-state-prices">
+    {% for state, price in variant.prices_per_state.items() %}
+    <div>{{ state }}: R$ {{ price }}</div>
+    {% endfor %}
+  </td>
+  {% endif %}
+
+  <td>
+    <input
+      class="fav-toggle"
+      type="checkbox"
+      title="Favoritar"
+      {%
+      if
+      variant.favorite
+      %}checked{%
+      endif
+      %}
+      hx-post="/toggle_favorite"
+      hx-trigger="change"
+      hx-vals='js:{ link: "{{ link }}", variant_name: "{{ variant.name }}", value:
+    event.target.checked }'
+      hx-on::change="console.log('changed')"
+      hx-target="closest tr"
+      hx-swap="outerHTML"
+    />
+  </td>
+  <td>{% if variant.favorite %} Possuo {% else %} Não possuo {% endif %}</td>
+</tr>

@@ -1,0 +1,14 @@
+<div id="message"></div>
+<form hx-post="/add-card" hx-target="#message" hx-swap="beforeend">
+  <div class="add-card-container">
+    <h2 class="add-card-title">Adicionar cartas</h2>
+
+    <textarea
+      class="add-card-textarea"
+      name="links"
+      placeholder="Cole um link por linha"
+    ></textarea>
+
+    <button class="add-card-submit" type="submit">Adicionar</button>
+  </div>
+</form>
