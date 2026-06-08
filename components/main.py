@@ -34,7 +34,6 @@ def home(request: Request):
     with get_conn() as conn:
 
         
-
         cursor = conn.cursor()
 
         cursor.execute("""
@@ -190,7 +189,8 @@ def add_card_confirm(
 
     if platform.system() == "Windows":
         chrome_exe = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-        debug_path = "--user-data-dir=C:\\temp\\chrome-debug"
+        debug_path = f"--user-data-dir={os.environ.get('LOCALAPPDATA')}\\Google\\Chrome\\User Data"
+
 
         if not os.path.exists(chrome_exe):
             chrome_exe = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
@@ -222,7 +222,11 @@ def add_card_confirm(
 
             for l in lista_links:
                 try:
-                    add_card(browser, l, "")
+                    if ("http" not in l):
+                        base_link = "https://www.ligapokemon.com.br/?view=cards/card&card="
+                        add_card(browser, base_link + l, "")
+                    else:
+                        add_card(browser, l, "")
                 except Exception as e:
                     print(f"Erro ao adicionar carta {l}: {e}")
             
