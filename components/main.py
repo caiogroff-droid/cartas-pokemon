@@ -1,3 +1,4 @@
+from enum import Enum
 import subprocess
 import time
 import platform
@@ -25,12 +26,33 @@ templates = Jinja2Templates(
 cartas: dict[str, Cards] = {}
 loading: bool = False
 
-
-init_database()
-@app.get("/")
-def home(request: Request):
+class FilterType(Enum):
+    OWNED = 1
+    NOT_OWNED = 2
+    HAS_PRICE_DATA = 3
+    ALL = 0
     
+currentfilterType = FilterType.ALL
+lastSearch: str = ''
 
+@app.get("/reset")
+def reset(request: Request):
+    global currentfilterType
+    currentfilterType = FilterType.ALL
+    return home(request)
+
+@app.post("/change-filter")
+def change_filter(request: Request, owned: str | None = Form(None)):
+    print(owned)
+    global currentfilterType
+    match owned:
+        case 'on':
+            currentfilterType = FilterType.OWNED
+        case None:
+            currentfilterType = FilterType.ALL
+    return search(request, lastSearch)
+    
+def load_cards():
     with get_conn() as conn:
 
         
@@ -94,12 +116,21 @@ def home(request: Request):
                         }
                     )
                     for variant in variants
-                    if variant[0] == card[0]
+                    if variant[0] == card[0] and checkFilterType(variant, currentfilterType)
                 ]
             )
             for card in cards
+            
         })
     
+
+init_database()
+@app.get("/")
+def home(request: Request):
+    
+
+    load_cards()
+
 
     return templates.TemplateResponse(
         request=request,
@@ -109,9 +140,29 @@ def home(request: Request):
         }
     )
 
+def checkFilterType(variant, filter: FilterType):
+    match filter:
+        case FilterType.ALL:
+            return True
+        case FilterType.OWNED:
+            if variant[6] and bool(variant[6]):
+                print(variant[2] + 'returned True')
+                return True
+            else:
+                print(variant[2] + 'returned False')
+                return False
+            
+        case FilterType.NOT_OWNED:
+            if variant[6] and bool(variant[6]):
+                return True
+    return False
+
 @app.get("/search")
-def search(request: Request, search: str):
-    home(request)
+def search(
+    request: Request,
+    search: str = "",
+):
+    load_cards()
     cartas_filtradas = {
         link: card
         for link, card in cartas.items()
@@ -119,6 +170,8 @@ def search(request: Request, search: str):
     }
     cartas.clear()
     cartas.update(cartas_filtradas)
+    global lastSearch
+    lastSearch = search
     return templates.TemplateResponse(
         request=request,
         name="partials/card_table.html",

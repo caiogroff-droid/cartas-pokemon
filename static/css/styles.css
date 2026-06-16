@@ -92,6 +92,38 @@ body {
   color: var(--accent);
 }
 
+/* ─── FILTER BAR ─────────────────────────────────────────────── */
+.filter-container {
+  position: relative;
+  flex: auto;
+  margin-bottom: 28px;
+  flex-direction: row;
+  display: flex;
+  align-items: anchor-center;
+  p {
+    margin-left: 15px;
+  }
+}
+
+.reset-wrapper {
+  position: relative;
+  flex: auto;
+  margin-bottom: 28px;
+  margin-left: 1vw;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  
+}   
+.reset-wrapper:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 7px rgba(245, 197, 24, 0.45);
+  cursor: pointer;
+}
+
 
 /* ─── SEARCH BAR ─────────────────────────────────────────────── */
 
@@ -216,6 +248,7 @@ body {
 .add-card-title {
   font-size: 1.3rem;
   font-weight: 700;
+  color: var(--red);
 }
 
 .add-card-textarea {
@@ -291,7 +324,7 @@ body {
 .card-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .card-table thead {
@@ -452,13 +485,13 @@ body {
   background: var(--accent-glow);
 }
 
-.fav-toggle[checked] {
+.fav-toggle:checked {
   border-color: var(--accent);
   background: rgba(245,197,24,0.15);
   box-shadow: 0 0 8px var(--accent-glow);
 }
 
-.fav-toggle[checked]::after {
+.fav-toggle:checked::after {
     color: var(--accent);
   }
 

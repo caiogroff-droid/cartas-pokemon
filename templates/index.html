@@ -50,6 +50,50 @@
           />
         </div>
         <button
+          class="reset-wrapper"
+          hx-get="/reset"
+          hx-target="body"
+          hx-swap="innerHTML"
+          hx-indicator="#cards-table"
+        >
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 2v6h-6"></path>
+            <path d="M3 12A9 9 0 0 1 18.13 5.36L21 8"></path>
+            <path d="M3 22v-6h6"></path>
+            <path d="M21 12a9 9 0 0 1-15.13 6.64L3 16"></path>
+          </svg>
+          <p>Reset Filters</p>
+        </button>
+        <div style="flex: 1"></div>
+
+        <div class="filter-container">
+          <input
+            type="checkbox"
+            class="fav-toggle"
+            id="owned"
+            name="owned"
+            title="Filtrar por coletados"
+            hx-post="/change-filter"
+            hx-trigger="change"
+            hx-target="#cards-table"
+            hx-swap="innerHTML"
+            hx-indicator="#cards-table"
+          />
+
+          <p>Mostrar apenas os coletados</p>
+        </div>
+        <button
           class="button-ball"
           title="Adicionar carta"
           hx-get="/add-card"
@@ -68,6 +112,10 @@
           .querySelectorAll("nav#topbar button")
           .forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
+      }
+
+      function getSearch() {
+        return document.querySelector(".search-input").value;
       }
     </script>
   </body>
