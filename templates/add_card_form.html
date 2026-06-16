@@ -1,8 +1,42 @@
+<!-- HEADER -->
+<header class="app-header">
+  <div class="header-brand">
+    <span class="header-eyebrow">Card Collection</span>
+    <h1 class="header-title">Pokémon <span>Tracker</span></h1>
+  </div>
+</header>
+
 <div id="message"></div>
 <form hx-post="/add-card" hx-target="body" hx-swap="innerHTML">
   <div class="add-card-container">
-    <h2 class="add-card-title">Adicionar cartas</h2>
-
+    <div class="form-header">
+      <div style="display: flex; flex-direction: column;">
+      <h2 class="add-card-title">Adicionar cartas</h2>
+      <h5 style="color: black;">Você pode usar um link direto do ligaPokemon.com.br <br> ou o nome e o código da carta (sem parêntesis) </h5>
+      <h5 style="color: red;">Ex: ash's pikachu sm114 ou <a href="https://www.ligapokemon.com.br/?view=cards/card&card=ash%27s%20pikachu%20(SM114)">https://www.ligapokemon.com.br/?view=cards/card&card=ash%27s%20pikachu%20(SM114)</a></h5>
+      
+    </div>
+      <div style="flex: 3"></div>
+      <button class="pokedex-btn"
+        title="Voltar à tabela"
+        hx-get="/"
+        hx-target="body"
+        hx-swap="innerHTML"
+      >
+        <div class="pokedex-top">
+          <div class="pokedex-light-big"></div>
+          <div class="pokedex-lights-small">
+            <div class="light red"></div>
+            <div class="light yellow"></div>
+            <div class="light green"></div>
+          </div>
+        </div>
+        <div class="pokedex-divider"></div>
+        <div class="pokedex-bottom">
+          <div class="pokedex-screen"></div>
+        </div>
+      </button>
+    </div>
     <textarea
       class="add-card-textarea"
       name="links"
@@ -12,3 +46,16 @@
     <button class="add-card-submit" type="submit">Adicionar</button>
   </div>
 </form>
+
+<section class="example">
+  <div style="display: flex; justify-content: space-evenly; margin-top: 2vw">
+    <div>
+      <h2 style="display: flex; justify-content: center;">Exemplo de como usar com um link do ligapokemon</h3>
+    </div>
+    <div>
+      <h2 style="display: flex; justify-content: center;">Como achar o codigo da carta?</h3>
+      <img src="/static/images/153998_in_1000x1000.jpg" style="display: block; overflow: hidden;"/>
+      <img src="/static/images/Number.png" style="overflow-x: hidden; display: block;">
+    </div>
+  </div>
+</section>

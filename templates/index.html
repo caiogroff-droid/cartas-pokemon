@@ -93,13 +93,23 @@
 
           <p>Mostrar apenas os coletados</p>
         </div>
+
+        {% if tableScreen %}
         <button
           class="button-ball"
           title="Adicionar carta"
           hx-get="/add-card"
-          hx-target=".table-container"
+          hx-target=".app-wrapper"
           onclick="setActive(this)"
         ></button>
+        {% else %}
+        <button
+          class="pokedex-icon"
+          title="Voltar para tabela"
+          hx-get="/"
+          hx-target=".app-wrapper"
+        ></button>
+        {% endif %}
       </div>
       <!-- TABLE -->
       <div class="table-container">
@@ -107,6 +117,8 @@
       </div>
     </div>
     <script>
+      tableScreen = true;
+
       function setActive(btn) {
         document
           .querySelectorAll("nav#topbar button")

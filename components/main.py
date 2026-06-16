@@ -137,6 +137,7 @@ def home(request: Request):
         name="index.html",
         context={
             "cartas": cartas,
+            "tableScreen": True
         }
     )
 
@@ -224,7 +225,8 @@ def add_card_form(request: Request):
         request=request,
         name="add_card_form.html",
         context={
-            "loading": loading
+            "loading": loading,
+            "tableScreen": False
         }
     )
 
@@ -277,7 +279,9 @@ def add_card_confirm(
                 try:
                     if ("http" not in l):
                         base_link = "https://www.ligapokemon.com.br/?view=cards/card&card="
-                        add_card(browser, base_link + l, "")
+                        partes = l.rsplit(" ", 1)
+                        resultado = f"{partes[0]} ({partes[1]})"
+                        add_card(browser, base_link + resultado, "")
                     else:
                         add_card(browser, l, "")
                 except Exception as e:
@@ -303,6 +307,7 @@ def add_card_confirm(
             name="index.html",
             context={
                 "cartas": cartas,
+                "tableScreen": True
             }
         )
 
