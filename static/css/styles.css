@@ -445,7 +445,6 @@ body {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  overflow: hidden;
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
 }
 
@@ -922,7 +921,10 @@ body {
 .collection-summary {
   flex-shrink: 0;
   width: 240px;
-  align-self: stretch;
+  position: sticky;
+  align-self: flex-start;
+  overflow-y: auto;
+  top: 0;
   background: var(--surface2);
   border-left: 1px solid var(--border);
   padding: 20px 18px;
