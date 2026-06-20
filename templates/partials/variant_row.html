@@ -1,4 +1,11 @@
-<tr class="{% if variant.favorite %}is-favorite{% endif %}">
+<tr
+  class="{% if variant.favorite %}is-favorite{% endif %}"
+  data-row-key="{{ link }}::{{ variant.name }}"
+  data-name="{{ card.name }}"
+  data-rarity="{{ card.rarity }}"
+  data-variant="{{ variant.name }}"
+  data-favorite="{{ '1' if variant.favorite else '0' }}"
+>
   <td class="cell-name">{{ card.name }}</td>
   <td class="cell-link">
     <a href="{{ link }}" target="_blank" rel="noopener">↗ link</a>
@@ -6,27 +13,78 @@
   <td class="cell-rarity">{{ card.rarity }}</td>
   <td class="cell-variant">{{ variant.name }}</td>
   <td class="cell-prices">
-    <span class="price-badge price-min">{{ variant.min }}</span>
-    <span class="price-badge price-med">{{ variant.medium }}</span>
-    <span class="price-badge price-max">{{ variant.max }}</span>
+    <div class="price-badges">
+      <button
+        type="button"
+        class="price-badge price-min"
+        data-price-kind="min"
+        data-price-raw="{{ variant.min }}"
+      >
+        <span class="price-badge-label">Baixo</span>
+        <span class="price-badge-value">{{ variant.min }}</span>
+      </button>
+      <button
+        type="button"
+        class="price-badge price-med"
+        data-price-kind="medium"
+        data-price-raw="{{ variant.medium }}"
+      >
+        <span class="price-badge-label">Médio</span>
+        <span class="price-badge-value">{{ variant.medium }}</span>
+      </button>
+      <button
+        type="button"
+        class="price-badge price-max"
+        data-price-kind="max"
+        data-price-raw="{{ variant.max }}"
+      >
+        <span class="price-badge-label">Alto</span>
+        <span class="price-badge-value">{{ variant.max }}</span>
+      </button>
+    </div>
   </td>
 
   {% if variant.prices_per_state %}
   <td class="cell-state-prices">
-    {% for state, price in variant.prices_per_state.items() %}
-    <div>{{ state }}: R$ {{ price }}</div>
-    {% endfor %}
+    <div class="state-price-list">
+      {% for state, price in variant.prices_per_state.items() %}
+      <button
+        type="button"
+        class="state-price-pill"
+        data-state-name="{{ state }}"
+        data-state-price="{{ price }}"
+        title="Marcar '{{ state }}' como o estado que eu possuo"
+      >
+        <span class="state-price-name">{{ state }}</span>
+        <span class="state-price-value">{{ price }}</span>
+      </button>
+      {% endfor %}
+    </div>
   </td>
   {% else %}
   <td class="cell-state-prices">
-    <div style="width: 100%;"></div>
+    <div class="state-price-empty">—</div>
   </td>
   {% endif %}
 
   <td>
-    <input class="fav-toggle" type="checkbox" title="Favoritar" {% if variant.favorite %}checked{% endif %}
-      hx-post="/toggle_favorite" hx-trigger="change" hx-vals='js:{ link: "{{ link }}", variant_name: "{{ variant.name }}", value:
-    event.target.checked }' hx-on::change="console.log('changed')" hx-target="closest tr" hx-swap="outerHTML" />
+    <input
+      class="fav-toggle"
+      type="checkbox"
+      title="Favoritar"
+      {%
+      if
+      variant.favorite
+      %}checked{%
+      endif
+      %}
+      hx-post="/toggle_favorite"
+      hx-trigger="change"
+      hx-vals='js:{ link: "{{ link }}", variant_name: "{{ variant.name }}", value:
+    event.target.checked }'
+      hx-on::change="console.log('changed')"
+      hx-target="closest tr"
+      hx-swap="outerHTML"
+    />
   </td>
-  <td>{% if variant.favorite %} Possuo {% else %} Não possuo {% endif %}</td>
 </tr>

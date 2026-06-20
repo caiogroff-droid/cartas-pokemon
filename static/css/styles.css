@@ -1,37 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap");
 
 /* ─── RESET & BASE ───────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg:          #0d0f14;
-  --surface:     #13161e;
-  --surface2:    #1a1e2a;
-  --border:      #252a38;
-  --border-glow: #f5c518;
-  --accent:      #f5c518;
-  --accent-dim:  #b8941a;
-  --accent-glow: rgba(245, 197, 24, 0.18);
-  --text:        #e8eaf2;
-  --text-muted:  #7a8099;
-  --red:         #e84057;
-  --blue:        #3b9eff;
-  --green:       #2dce89;
-  --fav:         #f5c518;
-  --radius:      6px;
-  --radius-lg:   12px;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-html { scroll-behavior: smooth; }
+:root {
+  --bg: #0d0f14;
+  --surface: #13161e;
+  --surface2: #1a1e2a;
+  --border: #252a38;
+  --border-glow: #f5c518;
+  --accent: #f5c518;
+  --accent-dim: #b8941a;
+  --accent-glow: rgba(245, 197, 24, 0.18);
+  --text: #e8eaf2;
+  --text-muted: #7a8099;
+  --red: #e84057;
+  --blue: #3b9eff;
+  --green: #2dce89;
+  --fav: #f5c518;
+  --radius: 6px;
+  --radius-lg: 12px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Rajdhani', sans-serif;
+  font-family: "Rajdhani", sans-serif;
   font-size: 16px;
   min-height: 100vh;
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(245,197,24,0.07) 0%, transparent 60%),
+    radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      rgba(245, 197, 24, 0.07) 0%,
+      transparent 60%
+    ),
     url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
@@ -54,7 +66,7 @@ body {
 }
 
 .app-header::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -1px;
   left: 0;
@@ -71,7 +83,7 @@ body {
 }
 
 .header-eyebrow {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -80,12 +92,12 @@ body {
 }
 
 .header-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   font-size: clamp(2rem, 5vw, 3.4rem);
   letter-spacing: 3px;
   color: var(--text);
   line-height: 1;
-  text-shadow: 0 0 40px rgba(245,197,24,0.25);
+  text-shadow: 0 0 40px rgba(245, 197, 24, 0.25);
 }
 
 .header-title span {
@@ -99,7 +111,7 @@ body {
   margin-bottom: 28px;
   flex-direction: row;
   display: flex;
-  align-items: anchor-center;
+  align-items: center;
   p {
     margin-left: 15px;
   }
@@ -114,16 +126,14 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   color: var(--text);
-  font-family: 'Rajdhani', sans-serif;
+  font-family: "Rajdhani", sans-serif;
   font-size: 16px;
-  
-}   
+}
 .reset-wrapper:hover {
   transform: scale(1.05);
   box-shadow: 0 0 7px rgba(245, 197, 24, 0.45);
   cursor: pointer;
 }
-
 
 /* ─── SEARCH BAR ─────────────────────────────────────────────── */
 
@@ -155,12 +165,14 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   color: var(--text);
-  font-family: 'Rajdhani', sans-serif;
+  font-family: "Rajdhani", sans-serif;
   font-size: 16px;
   font-weight: 500;
   padding: 12px 16px 12px 44px;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .search-input::placeholder {
@@ -170,7 +182,9 @@ body {
 
 .search-input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow), 0 0 20px var(--accent-glow);
+  box-shadow:
+    0 0 0 3px var(--accent-glow),
+    0 0 20px var(--accent-glow);
 }
 
 .htmx-request .search-input {
@@ -179,58 +193,61 @@ body {
 
 /* ─── ADD BUTTON ─────────────────────────────────────────────── */
 .button-ball {
-    position: relative;
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    margin-bottom: 28px;
-    border: 3px solid #0b0f1c;
-    cursor: pointer;
-    background: linear-gradient(
-      to bottom,
-      #e84057 0%, #e84057 48%,
-      #f5f7ff 48%, #f5f7ff 100%
-    );
-    box-shadow: 0 0 20px rgba(232, 64, 87, 0.35);
-    transition: transform .2s ease, box-shadow .2s ease;
-  }
-  
-  .button-ball:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 28px rgba(245, 197, 24, 0.45);
-  }
-  
-  .button-ball:active {
-    transform: scale(0.96);
-  }
-  
-  /* faixa central */
-  .button-ball::before {
-    content: '';
-    position: absolute;
-    left: -3px; right: -3px;
-    top: 50%;
-    height: 4px;
-    transform: translateY(-50%);
-    background: #0b0f1c;
-  }
-  
-  /* círculo central — agora maior e com + embutido */
-  .button-ball::after {
-    content: '+';
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: white;
-    border: 3px solid #0b0f1c;
-    z-index: 2;
- 
-  }
+  position: relative;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  margin-bottom: 28px;
+  border: 3px solid #0b0f1c;
+  cursor: pointer;
+  background: linear-gradient(
+    to bottom,
+    #e84057 0%,
+    #e84057 48%,
+    #f5f7ff 48%,
+    #f5f7ff 100%
+  );
+  box-shadow: 0 0 20px rgba(232, 64, 87, 0.35);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
 
+.button-ball:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 28px rgba(245, 197, 24, 0.45);
+}
+
+.button-ball:active {
+  transform: scale(0.96);
+}
+
+/* faixa central */
+.button-ball::before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  right: -3px;
+  top: 50%;
+  height: 4px;
+  transform: translateY(-50%);
+  background: #0b0f1c;
+}
+
+/* círculo central — agora maior e com + embutido */
+.button-ball::after {
+  content: "+";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #0b0f1c;
+  z-index: 2;
+}
 
 /* --- Voltar --------------------------------------------------- */
 
@@ -249,15 +266,20 @@ body {
   flex-direction: column;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(232, 64, 87, 0.35);
-  transition: transform .2s ease, box-shadow .2s ease;
-  transform: rotate(180deg);  
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  transform: rotate(180deg);
 }
 .pokedex-btn:hover {
   transform: scale(1.08);
   box-shadow: 0 0 28px rgba(245, 197, 24, 0.45);
   transform: rotate(180deg);
 }
-.pokedex-btn:active { transform: scale(0.96); transform: rotate(180deg); }
+.pokedex-btn:active {
+  transform: scale(0.96);
+  transform: rotate(180deg);
+}
 
 /* metade de cima */
 .pokedex-top {
@@ -284,11 +306,17 @@ body {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.3);
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
-.light.red    { background: #ff4444; }
-.light.yellow { background: #f5c518; }
-.light.green  { background: #44cc44; }
+.light.red {
+  background: #ff4444;
+}
+.light.yellow {
+  background: #f5c518;
+}
+.light.green {
+  background: #44cc44;
+}
 
 /* faixa divisória */
 .pokedex-divider {
@@ -298,17 +326,22 @@ body {
 }
 .pokedex-divider::before,
 .pokedex-divider::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   width: 6px;
   height: 10px;
   background: #0b0f1c;
-  
 }
-.pokedex-divider::before { left: -1px; border-radius: 0 4px 4px 0; }
-.pokedex-divider::after  { right: -1px; border-radius: 4px 0 0 4px; }
+.pokedex-divider::before {
+  left: -1px;
+  border-radius: 0 4px 4px 0;
+}
+.pokedex-divider::after {
+  right: -1px;
+  border-radius: 4px 0 0 4px;
+}
 
 /* metade de baixo */
 .pokedex-bottom {
@@ -324,7 +357,7 @@ body {
   border-radius: 3px;
   background: #90ee90;
   border: 2px solid #0b0f1c;
-  box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
 /* ─── ADD FORM ───────────────────────────────────────────────── */
@@ -339,8 +372,7 @@ body {
 
   padding: 1.5rem;
 
-  box-shadow:
-      0 8px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
 .add-card-title {
@@ -366,32 +398,10 @@ body {
   background: #fafafa;
 }
 
-.sort-btn {
-  background: none;
-  border: none;
-  padding: 2px;
-  margin-left: 4px;
-  cursor: pointer;
-  color: var(--text-muted);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 0.4vw;
-}
-
-.sort-btn:hover {
-  color: var(--accent);
-}
-
-.sort-btn.active {
-  color: var(--accent);
-}
-
 .add-card-textarea:focus {
   outline: none;
   border-color: var(--red);
-  box-shadow:
-      0 0 0 4px rgba(232,64,87,0.15);
+  box-shadow: 0 0 0 4px rgba(232, 64, 87, 0.15);
 }
 
 .add-card-submit {
@@ -424,10 +434,10 @@ body {
 
 @keyframes spin {
   from {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   to {
-      transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 /* ─── TABLE CONTAINER ────────────────────────────────────────── */
@@ -436,7 +446,20 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── TABLE + SUMMARY LAYOUT ─────────────────────────────────── */
+.table-and-summary {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.table-scroll {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
 }
 
 /* ─── TABLE ──────────────────────────────────────────────────── */
@@ -456,7 +479,7 @@ body {
 }
 
 .card-table thead tr::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -468,7 +491,7 @@ body {
 .card-table th {
   padding: 14px 16px;
   text-align: left;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -477,8 +500,12 @@ body {
   font-weight: 400;
 }
 
-.card-table th:first-child { padding-left: 20px; }
-.card-table th:last-child  { padding-right: 20px; }
+.card-table th:first-child {
+  padding-left: 20px;
+}
+.card-table th:last-child {
+  padding-right: 20px;
+}
 
 .card-table tbody tr {
   border-bottom: 1px solid var(--border);
@@ -486,7 +513,9 @@ body {
   position: relative;
 }
 
-.card-table tbody tr:last-child { border-bottom: none; }
+.card-table tbody tr:last-child {
+  border-bottom: none;
+}
 
 .card-table tbody tr:hover {
   background: rgba(245, 197, 24, 0.04);
@@ -508,8 +537,13 @@ body {
   font-weight: 500;
 }
 
-.card-table td:first-child { padding-left: 20px; }
-.card-table td:last-child  { padding-right: 20px; text-align: center; }
+.card-table td:first-child {
+  padding-left: 20px;
+}
+.card-table td:last-child {
+  padding-right: 20px;
+  text-align: center;
+}
 
 /* ─── TABLE CELLS ────────────────────────────────────────────── */
 .cell-name {
@@ -521,11 +555,13 @@ body {
 .cell-link a {
   color: var(--blue);
   text-decoration: none;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   font-size: 12px;
   letter-spacing: 0.5px;
   opacity: 0.8;
-  transition: opacity 0.15s, color 0.15s;
+  transition:
+    opacity 0.15s,
+    color 0.15s;
 }
 
 .cell-link a:hover {
@@ -545,24 +581,14 @@ body {
 }
 
 .cell-prices {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   font-size: 13px;
   display: flex;
+  flex-direction: column;
   gap: 6px;
   align-items: center;
   flex-wrap: wrap;
 }
-
-.price-badge {
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.price-min  { background: rgba(45,206,137,0.12); color: var(--green); }
-.price-med  { background: rgba(59,158,255,0.12); color: var(--blue);  }
-.price-max  { background: rgba(232,64,87,0.12);  color: var(--red);   }
 
 .cell-state {
   font-size: 13px;
@@ -593,7 +619,7 @@ body {
 }
 
 .fav-toggle::after {
-  content: '★';
+  content: "★";
   font-size: 13px;
   color: transparent;
   transition: color 0.2s;
@@ -606,13 +632,13 @@ body {
 
 .fav-toggle:checked {
   border-color: var(--accent);
-  background: rgba(245,197,24,0.15);
+  background: rgba(245, 197, 24, 0.15);
   box-shadow: 0 0 8px var(--accent-glow);
 }
 
 .fav-toggle:checked::after {
-    color: var(--accent);
-  }
+  color: var(--accent);
+}
 
 /* ─── EMPTY STATE ────────────────────────────────────────────── */
 .empty-state {
@@ -628,7 +654,7 @@ body {
 }
 
 .empty-state-text {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   font-size: 1.4rem;
   letter-spacing: 2px;
   color: var(--text-muted);
@@ -644,14 +670,365 @@ body {
 }
 
 /* ─── SCROLLBAR ──────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .app-wrapper { padding: 0 16px 40px; }
-  .card-table th, .card-table td { padding: 10px 10px; font-size: 13px; }
-  .cell-prices { flex-direction: column; gap: 3px; }
+  .app-wrapper {
+    padding: 0 16px 40px;
+  }
+  .card-table th,
+  .card-table td {
+    padding: 10px 10px;
+    font-size: 13px;
+  }
+  .cell-prices {
+    flex-direction: column;
+    gap: 3px;
+  }
+}
+
+/* ─── SORTABLE HEADERS ───────────────────────────────────────── */
+.th-sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s;
+}
+
+.th-sortable:hover {
+  color: var(--accent);
+}
+
+.th-sortable .th-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sort-indicator {
+  display: inline-block;
+  width: 10px;
+  font-size: 10px;
+  color: var(--accent);
+}
+
+.th-sortable.is-sorted {
+  color: var(--accent);
+}
+
+.th-prices {
+  vertical-align: middle;
+}
+
+.th-prices-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.price-sort-buttons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.sort-btn {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 3px 6px;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition:
+    color 0.15s,
+    border-color 0.15s,
+    background 0.15s;
+}
+
+.sort-btn svg {
+  transition: transform 0.15s;
+}
+
+.sort-btn:hover {
+  color: var(--accent);
+  border-color: var(--border);
+  background: rgba(245, 197, 24, 0.06);
+}
+
+.sort-btn.active {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-glow);
+}
+
+.sort-btn.active.sort-desc svg {
+  transform: rotate(180deg);
+}
+
+/* ─── PRICE BADGES (clicáveis) ───────────────────────────────── */
+.price-badges {
+  display: flex;
+  gap: 6px;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.price-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  padding: 4px 9px;
+  border-radius: var(--radius);
+  font-family: "Share Tech Mono", monospace;
+  border: 1px solid transparent;
+  background: none;
+  transition:
+    transform 0.12s,
+    box-shadow 0.12s,
+    border-color 0.12s;
+}
+
+.price-badge:hover {
+  transform: translateY(-1px);
+}
+
+.price-badge-label {
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.price-badge-value {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.price-badge.price-min {
+  background: rgba(45, 206, 137, 0.12);
+  color: var(--green);
+}
+.price-badge.price-med {
+  background: rgba(59, 158, 255, 0.12);
+  color: var(--blue);
+}
+.price-badge.price-max {
+  background: rgba(232, 64, 87, 0.12);
+  color: var(--red);
+}
+
+.price-badge.price-min:hover {
+  border-color: var(--green);
+}
+.price-badge.price-med:hover {
+  border-color: var(--blue);
+}
+.price-badge.price-max:hover {
+  border-color: var(--red);
+}
+
+/* ─── STATE PRICE PILLS (clicáveis) ──────────────────────────── */
+.cell-state-prices {
+  min-width: 160px;
+}
+
+.state-price-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.state-price-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px 9px;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 12px;
+  transition:
+    border-color 0.15s,
+    background 0.15s,
+    transform 0.12s;
+  text-align: left;
+}
+
+.state-price-pill:hover {
+  border-color: var(--accent-dim);
+  transform: translateX(2px);
+}
+
+.state-price-pill.is-selected {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.state-price-pill.is-selected .state-price-name::before {
+  content: "✓ ";
+  color: var(--accent);
+}
+
+.state-price-name {
+  font-style: italic;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.state-price-pill.is-selected .state-price-name {
+  color: var(--text);
+}
+
+.state-price-value {
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.state-price-empty {
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ─── COLLECTION SUMMARY (mostrador de total) ────────────────── */
+.collection-summary {
+  flex-shrink: 0;
+  width: 240px;
+  align-self: stretch;
+  background: var(--surface2);
+  border-left: 1px solid var(--border);
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.summary-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: var(--text);
+}
+
+.summary-subtitle {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.summary-subtitle span {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+}
+
+.summary-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.summary-min .summary-dot {
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+}
+.summary-med .summary-dot {
+  background: var(--blue);
+  box-shadow: 0 0 6px var(--blue);
+}
+.summary-max .summary-dot {
+  background: var(--red);
+  box-shadow: 0 0 6px var(--red);
+}
+
+.summary-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.summary-value {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.summary-min .summary-value {
+  color: var(--green);
+}
+.summary-med .summary-value {
+  color: var(--blue);
+}
+.summary-max .summary-value {
+  color: var(--red);
+}
+
+.summary-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+@media (max-width: 900px) {
+  .table-and-summary {
+    flex-direction: column;
+  }
+
+  .collection-summary {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .summary-title,
+  .summary-subtitle,
+  .summary-hint {
+    width: 100%;
+  }
+
+  .summary-row {
+    flex: 1 1 160px;
+  }
 }

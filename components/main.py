@@ -244,7 +244,8 @@ def add_card_confirm(
 
     if platform.system() == "Windows":
         chrome_exe = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-        debug_path = f"--user-data-dir={os.environ.get('LOCALAPPDATA')}\\Google\\Chrome\\User Data"
+        debug_path = "--user-data-dir=C:\\temp\\chrome-debug"
+
 
 
         if not os.path.exists(chrome_exe):

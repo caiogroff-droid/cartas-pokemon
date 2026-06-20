@@ -1,74 +1,147 @@
 {% if cartas %}
-<table class="card-table">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Link</th>
-      <th>Raridade</th>
-      <th>Variante</th>
-      <th style="display: flex; align-items: center">
-        <p style="margin-right: 1vw">Preços</p>
-        <button class="sort-btn price-min" title="Ordenar preço mínimo">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="m8 9 4-4 4 4"></path>
-            <path d="m16 15-4 4-4-4"></path>
-          </svg>
-        </button>
+<div class="table-and-summary">
+  <div class="table-scroll">
+    <table class="card-table" id="card-table">
+      <thead>
+        <tr>
+          <th class="th-sortable" data-sort-key="name" data-sort-type="text">
+            <span class="th-label">Nome</span>
+            <span class="sort-indicator"></span>
+          </th>
+          <th>Link</th>
+          <th class="th-sortable" data-sort-key="rarity" data-sort-type="text">
+            <span class="th-label">Raridade</span>
+            <span class="sort-indicator"></span>
+          </th>
+          <th class="th-sortable" data-sort-key="variant" data-sort-type="text">
+            <span class="th-label">Variante</span>
+            <span class="sort-indicator"></span>
+          </th>
+          <th class="th-prices">
+            <div class="th-prices-inner">
+              <span class="th-label">Preços</span>
+              <div class="price-sort-buttons">
+                <button
+                  class="sort-btn price-min"
+                  data-sort-key="price-min"
+                  data-sort-type="number"
+                  title="Ordenar por preço mínimo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m8 9 4-4 4 4"></path>
+                    <path d="m16 15-4 4-4-4"></path>
+                  </svg>
+                  <span class="sort-btn-label">Mín</span>
+                </button>
 
-        <button class="sort-btn price-med" title="Ordenar preço médio">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="m8 9 4-4 4 4"></path>
-            <path d="m16 15-4 4-4-4"></path>
-          </svg>
-        </button>
+                <button
+                  class="sort-btn price-med"
+                  data-sort-key="price-med"
+                  data-sort-type="number"
+                  title="Ordenar por preço médio"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m8 9 4-4 4 4"></path>
+                    <path d="m16 15-4 4-4-4"></path>
+                  </svg>
+                  <span class="sort-btn-label">Médio</span>
+                </button>
 
-        <button class="sort-btn price-max" title="Ordenar preço máximo">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+                <button
+                  class="sort-btn price-max"
+                  data-sort-key="price-max"
+                  data-sort-type="number"
+                  title="Ordenar por preço máximo"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m8 9 4-4 4 4"></path>
+                    <path d="m16 15-4 4-4-4"></path>
+                  </svg>
+                  <span class="sort-btn-label">Máx</span>
+                </button>
+              </div>
+            </div>
+          </th>
+          <th></th>
+          <th
+            class="th-sortable"
+            data-sort-key="favorite"
+            data-sort-type="bool"
           >
-            <path d="m8 9 4-4 4 4"></path>
-            <path d="m16 15-4 4-4-4"></path>
-          </svg>
-        </button>
-      </th>
-      <th>Estado</th>
-      <th>★</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for link, card in cartas.items() %} {% for variant in card.variants %} {%
-    include "partials/variant_row.html" with context %} {% endfor %} {% endfor
-    %}
-  </tbody>
-</table>
+            <span class="th-label">★</span>
+            <span class="sort-indicator"></span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for link, card in cartas.items() %} {% for variant in card.variants
+        %} {% include "partials/variant_row.html" with context %} {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MOSTRADOR DE TOTAL DA COLEÇÃO (CARTAS COLETADAS) -->
+  <aside class="collection-summary" id="collection-summary">
+    <h3 class="summary-title">Coleção coletada</h3>
+    <p class="summary-subtitle">
+      <span id="summary-count">0</span> carta(s) marcada(s)
+    </p>
+
+    <div class="summary-row summary-min">
+      <span class="summary-dot"></span>
+      <span class="summary-label">Total (mínimo)</span>
+      <span class="summary-value" id="summary-total-min">R$ 0,00</span>
+    </div>
+
+    <div class="summary-row summary-med">
+      <span class="summary-dot"></span>
+      <span class="summary-label">Total (médio)</span>
+      <span class="summary-value" id="summary-total-med">R$ 0,00</span>
+    </div>
+
+    <div class="summary-row summary-max">
+      <span class="summary-dot"></span>
+      <span class="summary-label">Total (máximo)</span>
+      <span class="summary-value" id="summary-total-max">R$ 0,00</span>
+    </div>
+
+    <p class="summary-hint">
+      Os valores usam o preço do estado selecionado em cada carta (quando
+      disponível) ou o preço base da variante.
+    </p>
+  </aside>
+</div>
 {% else %}
 <div class="empty-state">
   <div class="empty-state-icon">◎</div>

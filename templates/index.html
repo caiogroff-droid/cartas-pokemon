@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -6,6 +6,7 @@
     <title>Pokémon Tracker</title>
     <link rel="stylesheet" href="/static/css/styles.css" />
     <script src="https://unpkg.com/htmx.org@2.0.7"></script>
+    <script src="/static/js/cards.js"></script>
   </head>
   <body>
     <div class="app-wrapper">
@@ -100,7 +101,6 @@
           title="Adicionar carta"
           hx-get="/add-card"
           hx-target=".app-wrapper"
-          onclick="setActive(this)"
         ></button>
         {% else %}
         <button
@@ -116,19 +116,5 @@
         <div id="cards-table">{% include "partials/card_table.html" %}</div>
       </div>
     </div>
-    <script>
-      tableScreen = true;
-
-      function setActive(btn) {
-        document
-          .querySelectorAll("nav#topbar button")
-          .forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-      }
-
-      function getSearch() {
-        return document.querySelector(".search-input").value;
-      }
-    </script>
   </body>
 </html>
