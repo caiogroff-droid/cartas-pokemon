@@ -14,9 +14,8 @@ from scraper import get_card_html, parse_card, print_card
 
 def load_cards():
     with get_conn() as conn:
-
+        
         cards, variants, prices = getDatabaseData(conn)
-
         cartas.clear()
         cartas.update({
             card[0]: Cards(
@@ -127,6 +126,19 @@ def add_card(browser, link):
         addDatatoDatabase(conn, card, link)
 
     print_card(card)
+
+def reset_filter():
+    global currentfilterType
+    currentfilterType = FilterType.ALL
+
+def filter_to(owned):
+    global currentfilterType
+    match owned:
+        case 'on':
+            currentfilterType = FilterType.OWNED
+        case None:
+            currentfilterType = FilterType.ALL
+
 
 
 def update_cards(browser):

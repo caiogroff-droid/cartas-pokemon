@@ -1,7 +1,7 @@
-from helper_functions import addCardstoDatabase, load_cards
+from helper_functions import addCardstoDatabase, filter_to, load_cards, reset_filter
 
-from database import init_database, get_conn, toggleOwned
-from variables import *
+from database import init_database, toggleOwned
+from variables import cartas, lastSearch
 
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
@@ -79,19 +79,12 @@ def toggle_favorite(
 
 @app.get("/reset")
 def reset(request: Request):
-    global currentfilterType
-    currentfilterType = FilterType.ALL
+    reset_filter()
     return home(request)
 
 @app.post("/change-filter")
 def change_filter(request: Request, owned: str | None = Form(None)):
-    print(owned)
-    global currentfilterType
-    match owned:
-        case 'on':
-            currentfilterType = FilterType.OWNED
-        case None:
-            currentfilterType = FilterType.ALL
+    filter_to(owned)
     return search(request, lastSearch)
 
 
@@ -101,7 +94,6 @@ def add_card_form(request: Request):
         request=request,
         name="add_card_form.html",
         context={
-            "loading": loading,
             "tableScreen": False
         }
     )

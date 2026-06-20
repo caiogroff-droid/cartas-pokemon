@@ -7,7 +7,6 @@ from models import Cards
 
 
 cartas: dict[str, Cards] = {}
-loading: bool = False
 
 class FilterType(Enum):
     OWNED = 1
