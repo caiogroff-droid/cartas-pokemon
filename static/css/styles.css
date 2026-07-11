@@ -366,7 +366,7 @@ body {
   flex-direction: column;
   gap: 1rem;
 
-  background: white;
+  background: #e8eaf2;
   border: 2px solid var(--border);
   border-radius: 16px;
 
@@ -395,7 +395,7 @@ body {
   font-family: inherit;
   font-size: 0.95rem;
 
-  background: #fafafa;
+  background: #f3f4f7;
 }
 
 .add-card-textarea:focus {
