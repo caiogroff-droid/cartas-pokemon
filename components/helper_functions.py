@@ -8,7 +8,6 @@ from playwright.sync_api import sync_playwright
 from database import addDatatoDatabase, get_conn, getDatabaseData
 from models import Variant
 from variables import *
-from csv_export import export_csv
 from scraper import get_card_html, parse_card, print_card
 
 
