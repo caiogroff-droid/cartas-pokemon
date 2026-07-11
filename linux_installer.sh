@@ -1,15 +1,24 @@
 #!/bin/bash
 
-python3 -m venv .venv
+cd "$(dirname "$0")"
 
-source .venv/bin/activate
+if [ ! -d ".venv" ]; then
+    echo "Primeira execução..."
+    python3 -m venv .venv
 
-pip install -U pip
+    source .venv/bin/activate
 
-pip install -r requirements.txt
+    pip install --upgrade pip
+    pip install -r requirements.txt
 
-playwright install chrome
+    playwright install chrome
+else
+    source .venv/bin/activate
+fi
 
-apt install uvicorn -y
+cd components
 
-echo "Instalação concluída!"
+echo "Instalação concluída! Iniciando servidor..."
+echo "Acesse http://127.0.0.1:8000"
+
+python -m uvicorn main:app --reload

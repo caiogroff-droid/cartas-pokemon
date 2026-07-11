@@ -1,6 +1,6 @@
 # Pokémon Card Collection Manager
 
-Uma aplicação web para gerenciamento de coleções de cartas Pokémon, permitindo pesquisar cartas, acompanhar preços, favoritar variantes e exportar a coleção.
+Uma aplicação web para gerenciamento de coleções de cartas Pokémon, permitindo pesquisar cartas, acompanhar preços e favoritar variantes.
 
 O projeto foi desenvolvido como uma forma de explorar tecnologias modernas do ecossistema Python, combinando backend, automação, banco de dados e uma interface web dinâmica.
 
@@ -12,7 +12,6 @@ O projeto foi desenvolvido como uma forma de explorar tecnologias modernas do ec
 * Armazenamento local utilizando SQLite
 * Consulta de preços para diferentes variantes
 * Sistema de favoritos
-* Exportação da coleção para CSV
 * Interface inspirada em uma Pokédex
 * Atualizações dinâmicas utilizando HTMX
 * Automação para obtenção de dados com Playwright
@@ -47,15 +46,23 @@ O projeto foi desenvolvido como uma forma de explorar tecnologias modernas do ec
 
 ```
 components/
-├── main.py             # Aplicação FastAPI
-├── database.py         # Banco de dados
-├── scraper.py          # Coleta das informações
-├── parser_novo.py      # Processamento dos dados
-├── csv_export.py       # Exportação CSV
-└── models.py           # Modelos da aplicação
+├── main.py           # Aplicação FastAPI
+├── database.py       # Banco de dados
+├── scraper.py        # Coleta das informações
+├── parser_novo.py     # Processamento dos dados
+└── models.py          # Modelos da aplicação
 
-templates/
-static/
+templates/             # Páginas e partials Jinja2
+static/                 # CSS, JS e imagens
+
+experiments/            # Scripts manuais usados durante o desenvolvimento
+                        # (scraping exploratório, não são testes automatizados)
+
+requirements.txt        # Dependências Python
+linux_installer.sh      # Instala e inicia a aplicação no Linux
+iniciar_windows.bat     # Instala e inicia a aplicação no Windows
+demo.gif                # Demonstração usada no README
+LICENSE                 # Licença MIT
 ```
 
 ---

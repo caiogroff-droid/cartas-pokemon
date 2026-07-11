@@ -1,10 +1,11 @@
 import sqlite3
+import os
 
-DB_NAME = "cartas.db"
+DB_NAME = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cartas.db")
 
 def get_conn():
     conn = sqlite3.connect(
-        "cartas.db",
+        DB_NAME,
         timeout=30,
         check_same_thread=False
     )
