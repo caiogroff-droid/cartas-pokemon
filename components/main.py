@@ -8,30 +8,33 @@ from playwright.sync_api import sync_playwright
 
 from database import init_database, get_conn
 from scraper import get_card_html, parse_card, print_card
-from csv_export import export_csv
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from dataclasses import dataclass
 from models import Cards, Variant
 
+# Caminhos absolutos baseados na localização deste arquivo, para que a
+# aplicação funcione independentemente do diretório de onde o uvicorn
+# for iniciado (não dependemos mais de estar rodando de dentro de components/).
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, "..", "static")
+TEMPLATES_DIR = os.path.join(BASE_DIR, "..", "templates")
+
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="../static"), name="static")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 templates = Jinja2Templates(
-    directory="../templates"
+    directory=TEMPLATES_DIR
 )
 
 
 cartas: dict[str, Cards] = {}
-loading: bool = False
 
 class FilterType(Enum):
     OWNED = 1
-    NOT_OWNED = 2
-    HAS_PRICE_DATA = 3
     ALL = 0
-    
+
 currentfilterType = FilterType.ALL
 lastSearch: str = ''
 
@@ -116,7 +119,11 @@ def load_cards():
                         }
                     )
                     for variant in variants
-                    if variant[0] == card[0] and checkFilterType(variant, currentfilterType)
+                    if variant[0] == card[0]
+                    and (
+                        currentfilterType == FilterType.ALL
+                        or bool(variant[6])  # variant[6] é a coluna "favorite"
+                    )
                 ]
             )
             for card in cards
@@ -140,23 +147,6 @@ def home(request: Request):
             "tableScreen": True
         }
     )
-
-def checkFilterType(variant, filter: FilterType):
-    match filter:
-        case FilterType.ALL:
-            return True
-        case FilterType.OWNED:
-            if variant[6] and bool(variant[6]):
-                print(variant[2] + 'returned True')
-                return True
-            else:
-                print(variant[2] + 'returned False')
-                return False
-            
-        case FilterType.NOT_OWNED:
-            if variant[6] and bool(variant[6]):
-                return True
-    return False
 
 @app.get("/search")
 def search(
@@ -225,7 +215,6 @@ def add_card_form(request: Request):
         request=request,
         name="add_card_form.html",
         context={
-            "loading": loading,
             "tableScreen": False
         }
     )
@@ -240,7 +229,6 @@ def add_card_confirm(
         for l in links.splitlines()
         if l.strip()
     ]
-    loading = True
 
     if platform.system() == "Windows":
         chrome_exe = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
@@ -291,7 +279,6 @@ def add_card_confirm(
 
     except Exception as e:
         print(f"Erro ao conectar ao Chrome: {e}")
-        loading = False
         return templates.TemplateResponse(
             request=request,
             name="index.html",
@@ -302,7 +289,6 @@ def add_card_confirm(
     
     finally:
         chrome.terminate()
-        loading = False
         return templates.TemplateResponse(
             request=request,
             name="index.html",
@@ -416,35 +402,12 @@ def list_cards():
                 f"Estado: {card[2]}"
             )
 
-def export_cards():
-    with get_conn() as conn:
-        cursor = conn.cursor()
-
-        cursor.execute("""
-        SELECT
-            c.name,
-            c.rarity,
-            v.code,
-            v.variant_name,
-            v.min,
-            v.medium,
-            v.max,
-            c.current_state
-            v.favorite
-        FROM cartas c
-        LEFT JOIN carta_variantes v
-        ON c.link = v.link_carta
-        """)
-
-        export_csv(cursor.fetchall())
-
 def menu():
     return """
 0 - Sair
 1 - Adicionar carta
 2 - Listar cartas
-3 - Exportar CSV
-4 - Atualizar cartas
+3 - Atualizar cartas
 """
 
 def main():
@@ -496,10 +459,6 @@ def main():
                     list_cards()
 
                 elif option == "3":
-                    export_cards()
-                    print("cartas.csv gerado")
-
-                elif option == "4":
                     update_cards(browser)
 
     finally:
