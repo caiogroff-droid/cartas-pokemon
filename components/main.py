@@ -6,15 +6,21 @@ from variables import cartas, lastSearch
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from dataclasses import dataclass
+from models import Cards, Variant
 
-
-# init app ----------------------------------
+# Caminhos absolutos baseados na localização deste arquivo, para que a
+# aplicação funcione independentemente do diretório de onde o uvicorn
+# for iniciado (não dependemos mais de estar rodando de dentro de components/).
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, "..", "static")
+TEMPLATES_DIR = os.path.join(BASE_DIR, "..", "templates")
 
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="../static"), name="static")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 templates = Jinja2Templates(
-    directory="../templates"
+    directory=TEMPLATES_DIR
 )
 
 init_database()
